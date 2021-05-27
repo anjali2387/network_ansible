@@ -20,12 +20,5 @@
       content: "{{ config.stdout[0] }}"
       dest: "/var/lib/awx/projects/show_run_{{ inventory_hostname }}.txt"
     
-  - name: "notify operations_channel"
-    slack:
-      token: T01MPG3CTSR/B020TKE481Y/2eNlrivvB5E3IyRN0mxMD9jb
-      msg: 'Backup has been taken place successfully'
-      channel: '#operations_ansible'
-    delegate_to: localhost
-    become: true
-      
+ 
 
