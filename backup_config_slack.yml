@@ -26,5 +26,6 @@
       msg: 'Backup has been taken place successfully'
       channel: '#operations_ansible'
     delegate_to: localhost
+    become: true
       
 
