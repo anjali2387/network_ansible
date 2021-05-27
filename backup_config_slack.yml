@@ -1,7 +1,7 @@
 ---
 - name: General Config
   gather_facts: false
-  hosts: routers
+  hosts: Routers
   tasks:
 
   - name: show run
