@@ -15,7 +15,7 @@
   - debug:
      var: config
 
-  - name: save output to /home/anjali/backup
+  - name: save output to /var/lib/awx/projects
     copy:
       content: "{{ config.stdout[0] }}"
       dest: "/var/lib/awx/projects/show_run_{{ inventory_hostname }}.txt"
