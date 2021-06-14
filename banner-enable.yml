@@ -1,0 +1,24 @@
+---
+- name: enable banner
+  hosts: routers
+  gather_facts: false
+  tasks:
+  - name: configure the login banner
+    ios_banner:
+      banner: login
+      text: |
+        this is my DEMO login banner
+        that contains a login message
+        string
+      state: present
+    register: banner
+  - debug:
+      var: banner
+  - name: gathering banner details in network devices
+    ios_command:
+      commands:
+        - show banner login
+    register: banner_loin
+
+  - debug:
+      var: banner_loin
