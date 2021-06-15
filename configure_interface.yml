@@ -1,0 +1,14 @@
+---
+- name: add interface settings
+  hosts: Routers
+  gather_facts: false
+  tasks:
+  - name: configure interface settings
+    ios_config:
+      lines:
+        - description testdemo interface2
+      parents: interface GigabitEthernet2
+    register: interface
+
+  - debug:
+      var: interface
