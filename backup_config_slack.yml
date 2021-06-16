@@ -18,7 +18,7 @@
   - name: save output to /var/lib/awx/projects
     copy:
       content: "{{ config.stdout[0] }}"
-      dest: "/var/lib/awx/projects/show_run_{{ inventory_hostname }}.txt"
+      dest: "/backup/show_run_{{ inventory_hostname }}.txt"
     
  
 
