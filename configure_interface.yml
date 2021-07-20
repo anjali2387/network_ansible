@@ -6,7 +6,7 @@
   - name: configure interface settings
     ios_config:
       lines:
-        - description testdemo interface2
+        - description TEST_APD_demo interface2
       parents: interface GigabitEthernet2
     register: interface
 
