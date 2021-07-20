@@ -3,10 +3,10 @@
   hosts: Routers
   gather_facts: false
   tasks:
-  - name: configure interface settings
+  - name: configure DEMO interface settings
     ios_config:
       lines:
-        - description TEST_APD_demo interface2
+        - description ANSIBLE_APD_demo interface2
       parents: interface GigabitEthernet2
     register: interface
 
