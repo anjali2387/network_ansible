@@ -1,6 +1,6 @@
 ---
 - name: enable banner
-  hosts: Routers
+  hosts: switches
   gather_facts: false
   tasks:
   - name: configure the login banner
