@@ -2,6 +2,7 @@
 - name: enable banner
   hosts: switches
   gather_facts: false
+  ignore_errors: yes
   tasks:
   - name: configure the login banner
     ios_banner:
