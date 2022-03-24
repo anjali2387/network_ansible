@@ -1,0 +1,44 @@
+---
+- name: Setup Security Group
+  hosts: localhost
+  tasks:
+  - name: SG group creation
+    ec2_group:
+      aws_access_key: AKIATLLY4ZB2JU5TIK66
+      aws_secret_key: 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
+      vpc_id: vpc-06ccc52e5be0e791b
+      group_id: sg-026e30978269127aa
+      region: us-east-1
+      rules:
+      - proto: tcp
+        from_port: 80
+        to_port: 80
+        cidr-ip: 0.0.0.0/0
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr-ip: 0.0.0.0/0
+        #rules-egress:
+        #- proto: all
+        #cidr-ip: 0.0.0.0/0
+  - name: EC2 provisioning
+    ec2:
+      aws_access_key: AKIATLLY4ZB2JU5TIK66
+      aws_secret_key: 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
+      key_name: TE_Key
+      region: us-east-1
+      instance_type: t2.micro
+      image: ami-0c02fb55956c7d316
+      wait: yes
+      wait_timeout: 500
+      count: 1
+      instance_tags:
+        Name: TE_tag
+        Owner: Anjali
+      monitoring: no
+      vpc_subnet-id: subnet-076f7654c90a859f5
+      assign_public_ip: yes
+      group: AIOPS
+    register: ec2_output
+  - debug: 
+      var: ec2_output
