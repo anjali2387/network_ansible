@@ -1,0 +1,28 @@
+---
+- name: Create ticket with notes
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  vars_prompt:
+  - name: Incident_number
+    prompt: Please enter incident number
+    private: false
+  tasks:
+
+  - name: find a request
+    snow_record_find:
+            #state: present
+      table: incident
+      username: "{{ sn_username }}"
+      password: "{{ sn_password }}"
+      instance: "{{ sn_instance }}"
+      query:
+        number: "{{ Incident_number }}"
+      return_fields:      
+        - short_description
+        - opened_at
+    register: new_incident
+
+  - debug: 
+      var: new_incident.record
