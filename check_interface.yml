@@ -1,0 +1,57 @@
+---
+- name: checking configurations in network device
+  hosts: switches
+  connection: localhosts
+  gather_facts: false
+  tasks:
+  - name: Include vars
+    include_vars: change_request_vars.yml         
+
+  - name: CHECK CURRENT VERSION
+    ios_facts:
+    register: check_version
+    tags: version
+
+  - debug:
+      var: check_version
+    tags: version
+  - name: checking interface details 
+    ios_config:    
+      lines:  
+        - description ANSIBLE_TE_demo interface2
+      parents: interface GigabitEthernet2
+    check_mode: true
+    register: interface
+
+  - name: Displaying interface detial
+    debug:
+      var: interface
+
+  - name: Create SN Ticket IF CHNAGED
+    block:
+    - name: create an incident ticket
+      snow_record:
+        username: "{{sn_username}}"    
+        password: "{{sn_password}}"                              
+        instance: "{{sn_instance}}"                              
+        state: present                              
+        table: incident                    
+        data:                     
+          short_description: "CONFIG OUT OF COMPLIANCE ON {{inventory_hostname}}"     
+          severity: "{{sn_severity}}"                                                                              
+          priority: "{{sn_priority}}"   
+          caller_id: "System Administrator"                   
+          comments: "The configuration:\n--------\n {% for item in interface.updates %}{{item}}\n{% endfor %}\n--------\n is missing on {{inventory_hostname}}"        
+      register: snow_var    
+      delegate_to: localhost
+      
+    - name: ping tikcet numebr on slack
+      include_role:
+        name: slack_role
+    when: interface.changed                    
+     
+  - name:
+    debug:
+      var: snow_var.record.number       
+
+
