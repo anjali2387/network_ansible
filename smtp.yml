@@ -1,0 +1,13 @@
+---
+- name: send mail
+  hosts: localhosts
+  tasks:
+  - name : send mail
+      send_email: true
+      smtp_host: smtp.gmail.com
+      smtp_port: 587
+      mail_from: "anjaliadhikari25@gmail.com"
+      mail_to: "anjali.adhikari@ibm.com"
+      mail_subject: "Ansible password policy setting report"
+      smtp_user: anjaliadhikari25@gmail.com
+      smtp_pass: gooauygsyshhyhlb
