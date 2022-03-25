@@ -3,10 +3,9 @@
   hosts: switches
   connection: localhosts
   gather_facts: false
+  ignore_errors: yes
   tasks:
-  - name: Include vars
-    include_vars: /vars/vars.yml         
-
+  
   - name: CHECK CURRENT VERSION
     ios_facts:
     register: check_version
