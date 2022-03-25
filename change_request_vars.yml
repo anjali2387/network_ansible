@@ -1,0 +1,15 @@
+---
+#snow_record variables
+ 
+sn_username: admin
+sn_password: 9iYX4XfPdggM
+sn_instance: dev111461
+ 
+#data variables
+ 
+sn_severity: 2
+sn_priority: 2
+caller_id: Anjali
+State: In Progress
+sn_group: Network
+sn_category: Network
