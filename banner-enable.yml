@@ -21,5 +21,6 @@
         - show banner login
     register: banner_loin
 
-  - debug:
+  - name: network log 
+    debug:
       var: banner_loin
